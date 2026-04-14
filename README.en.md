@@ -54,6 +54,12 @@ multi-agent-dev/
 | Interface Config | YAML frontmatter | Markdown role definitions |
 | Install Location | `~/.claude/agents/` + `~/.claude/skills/` | `~/.agents/` + `~/.codex/AGENTS.md` |
 
+## Usage Guide
+
+Detailed usage guide with prompt engineering tips, model selection strategy, and walkthrough examples:
+
+**[View English Guide](docs/GUIDE.en.md)** | **[查看中文教程](docs/GUIDE.md)**
+
 ## Installation
 
 ```bash

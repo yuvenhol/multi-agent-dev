@@ -54,6 +54,12 @@ multi-agent-dev/
 | 接口配置 | YAML frontmatter | Markdown 角色定义 |
 | 安装位置 | `~/.claude/agents/` + `~/.claude/skills/` | `~/.agents/` + `~/.codex/AGENTS.md` |
 
+## 使用教程
+
+详细的使用指南、提示词工程技巧、模型选择策略和实战案例：
+
+**[查看完整教程](docs/GUIDE.md)** | **[View English Guide](docs/GUIDE.en.md)**
+
 ## 安装
 
 ```bash
