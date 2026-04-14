@@ -149,7 +149,7 @@ Phase 4-5（整合报告）   → 顶级模型
 | 代码审查 | 强模型 | 需发现隐藏问题 |
 | 代码实现 / 测试 / 文档 | 标准模型 | 有明确指导，执行即可 |
 
-**Claude Code** 中所有 agent 建议统一 `model: "opus"`。**Codex** 用 `-m o3` 指定模型。
+**Claude Code** 中所有 agent 建议统一 `model: "opus"`。**Codex** 在 `~/.codex/config.toml` 中设置 `model_reasoning_effort = "xhigh"` 以使用最强推理能力。
 
 ---
 

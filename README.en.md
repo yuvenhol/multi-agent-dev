@@ -149,7 +149,7 @@ Phase 4-5 (Integration & Report) → Top model
 | Code Review | Strong | Must catch hidden issues |
 | Implementation / Testing / Docs | Standard | Has clear guidance to follow |
 
-**Claude Code**: all agents should use `model: "opus"`. **Codex**: use `-m o3` to specify.
+**Claude Code**: all agents should use `model: "opus"`. **Codex**: set `model_reasoning_effort = "xhigh"` in `~/.codex/config.toml` for strongest reasoning.
 
 ---
 
