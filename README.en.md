@@ -10,22 +10,40 @@ Decomposes complex development tasks into specialized agent roles and orchestrat
 
 ## Quick Start
 
-### Installation
+### Let AI Help You Install
+
+If you're using Claude Code or another AI coding assistant, just send it this prompt:
+
+> Help me install multi-agent-dev, the multi-agent collaboration framework. Steps:
+> 1. Clone `https://github.com/yuwenhao/multi-agent-dev` locally
+> 2. Check my environment (whether `~/.claude` or `~/.codex` directories exist)
+> 3. If Claude Code, ensure env var `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` is set to `1`
+> 4. Run `./install.sh --all` to install
+> 5. Verify: check that `~/.claude/agents/` has 7 role files and `~/.claude/skills/cc-orchestrator` symlink is correct
+
+### Manual Installation
 
 ```bash
-git clone <repo-url>
-cd multi-agent-dev
+git clone https://github.com/yuwenhao/multi-agent-dev.git && cd multi-agent-dev
 chmod +x install.sh
-
 ./install.sh --all        # Install to all detected platforms
-./install.sh --claude     # Claude Code only
-./install.sh --codex      # Codex only
-./install.sh --uninstall  # Uninstall
 ```
 
-**Prerequisites:**
-- **Claude Code**: Requires Agent Teams — `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
-- **Codex**: Codex CLI installed
+> **Prerequisites:**
+> - **Claude Code**: Requires Agent Teams — `export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
+> - **Codex**: Codex CLI installed
+
+### Verify Installation
+
+```bash
+# Claude Code: check role files
+ls ~/.claude/agents/*.md
+# Should see 7 files: architect developer project-lead researcher reviewer tech-writer tester
+
+# Claude Code: check orchestrator
+ls -la ~/.claude/skills/cc-orchestrator
+# Should be a symlink to the repo
+```
 
 ### First Command
 

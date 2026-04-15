@@ -12,14 +12,45 @@
 
 ## 快速开始
 
+### 让 AI 帮你安装
+
+如果你正在使用 Claude Code 或其他 AI 编程助手，直接把下面这段话发给它：
+
+> 帮我安装 multi-agent-dev 多 Agent 协作框架。步骤：
+> 1. clone 仓库 `https://github.com/yuwenhao/multi-agent-dev` 到本地
+> 2. 检查我当前的环境（是否有 `~/.claude` 或 `~/.codex` 目录）
+> 3. 如果是 Claude Code 环境，确认环境变量 `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` 已设为 `1`
+> 4. 运行 `./install.sh --all` 安装
+> 5. 验证安装结果：检查 `~/.claude/agents/` 下是否有 7 个角色文件，`~/.claude/skills/cc-orchestrator` 符号链接是否正确
+
+### 手动安装
+
 ```bash
-git clone <repo-url> && cd multi-agent-dev && chmod +x install.sh
+git clone https://github.com/yuwenhao/multi-agent-dev.git && cd multi-agent-dev
+chmod +x install.sh
 ./install.sh --all        # 安装到所有检测到的平台
 ```
 
 > 前置要求：Claude Code 需启用 `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
+>
+> ```bash
+> # macOS/Linux 加到 shell 配置中
+> export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+> ```
 
-安装完成后，试一条：
+### 验证安装
+
+```bash
+# Claude Code：检查角色文件
+ls ~/.claude/agents/*.md
+# 应看到 7 个文件：architect developer project-lead researcher reviewer tech-writer tester
+
+# Claude Code：检查编排器
+ls -la ~/.claude/skills/cc-orchestrator
+# 应为指向仓库的符号链接
+```
+
+### 试一条
 
 ```
 # Claude Code
