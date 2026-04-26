@@ -13,11 +13,24 @@ echo ""
 HAS_CLAUDE=false
 HAS_CODEX=false
 
-if [ -d "$HOME/.claude" ]; then
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+has_detected_platforms() {
+    [ "$HAS_CLAUDE" = true ] || [ "$HAS_CODEX" = true ]
+}
+
+print_no_platforms() {
+    echo "未检测到 Claude Code 或 Codex 环境。"
+    echo "请先安装 Claude Code 或 Codex CLI，或使用 --claude / --codex 强制安装到指定平台。"
+}
+
+if [ -d "$HOME/.claude" ] || command_exists claude; then
     HAS_CLAUDE=true
 fi
 
-if [ -d "$HOME/.codex" ] || [ -d "$HOME/.agents" ]; then
+if [ -d "$HOME/.codex" ] || [ -d "$HOME/.agents" ] || command_exists codex; then
     HAS_CODEX=true
 fi
 
@@ -181,6 +194,10 @@ elif [ "$1" = "--claude" ]; then
 elif [ "$1" = "--codex" ]; then
     install_codex
 elif [ "$1" = "--all" ]; then
+    if ! has_detected_platforms; then
+        print_no_platforms
+        exit 1
+    fi
     [ "$HAS_CLAUDE" = true ] && install_claude
     [ "$HAS_CODEX" = true ] && install_codex
 elif [ "$1" = "--uninstall" ]; then
@@ -189,9 +206,8 @@ elif [ "$1" = "--uninstall" ]; then
     echo "=== 卸载完成 ==="
     exit 0
 else
-    if [ "$HAS_CLAUDE" = false ] && [ "$HAS_CODEX" = false ]; then
-        echo "未检测到 Claude Code 或 Codex 环境。"
-        echo "请先安装 Claude Code 或 Codex CLI。"
+    if ! has_detected_platforms; then
+        print_no_platforms
         exit 1
     fi
 

@@ -19,7 +19,7 @@ If you're using Claude Code or another AI coding assistant, just send it this pr
 > 2. Check my environment (whether `~/.claude` or `~/.codex` directories exist)
 > 3. If Claude Code, ensure env var `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` is set to `1`
 > 4. Run `./install.sh --all` to install
-> 5. Verify: check that `~/.claude/agents/` has 7 role files and `~/.claude/skills/cc-orchestrator` symlink is correct
+> 5. Verify: for Claude Code, check `~/.claude/agents/` and `~/.claude/skills/cc-orchestrator`; for Codex, check `~/.agents/agents/`, `~/.agents/skills/codex-orchestrator`, and `~/.codex/AGENTS.md`
 
 ### Manual Installation
 
@@ -28,6 +28,8 @@ git clone https://github.com/yuwenhao/multi-agent-dev.git && cd multi-agent-dev
 chmod +x install.sh
 ./install.sh --all        # Install to all detected platforms
 ```
+
+`--all` detects platforms from `~/.claude`, `~/.codex`, `~/.agents`, or the `claude` / `codex` commands. To force a specific platform install, use `./install.sh --claude` or `./install.sh --codex`.
 
 > **Prerequisites:**
 > - **Claude Code**: Requires Agent Teams — `export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
@@ -43,6 +45,15 @@ ls ~/.claude/agents/*.md
 # Claude Code: check orchestrator
 ls -la ~/.claude/skills/cc-orchestrator
 # Should be a symlink to the repo
+
+# Codex: check role files
+ls ~/.agents/agents/*.md
+# Should see 7 files: architect developer project-lead researcher reviewer tech-writer tester
+
+# Codex: check orchestrator and AGENTS.md
+ls -la ~/.agents/skills/codex-orchestrator
+test -s ~/.codex/AGENTS.md
+# Orchestrator should be a symlink to the repo, and AGENTS.md should exist and be non-empty
 ```
 
 ### First Command

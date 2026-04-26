@@ -21,7 +21,7 @@
 > 2. 检查我当前的环境（是否有 `~/.claude` 或 `~/.codex` 目录）
 > 3. 如果是 Claude Code 环境，确认环境变量 `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` 已设为 `1`
 > 4. 运行 `./install.sh --all` 安装
-> 5. 验证安装结果：检查 `~/.claude/agents/` 下是否有 7 个角色文件，`~/.claude/skills/cc-orchestrator` 符号链接是否正确
+> 5. 验证安装结果：Claude Code 检查 `~/.claude/agents/` 和 `~/.claude/skills/cc-orchestrator`；Codex 检查 `~/.agents/agents/`、`~/.agents/skills/codex-orchestrator` 和 `~/.codex/AGENTS.md`
 
 ### 手动安装
 
@@ -31,6 +31,8 @@ chmod +x install.sh
 ./install.sh --all        # 安装到所有检测到的平台
 ```
 
+> `--all` 会根据 `~/.claude` / `~/.codex` / `~/.agents` 目录或 `claude` / `codex` 命令自动检测平台。若需要强制安装到某个平台，可使用 `./install.sh --claude` 或 `./install.sh --codex`。
+>
 > 前置要求：Claude Code 需启用 `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
 >
 > ```bash
@@ -48,6 +50,15 @@ ls ~/.claude/agents/*.md
 # Claude Code：检查编排器
 ls -la ~/.claude/skills/cc-orchestrator
 # 应为指向仓库的符号链接
+
+# Codex：检查角色文件
+ls ~/.agents/agents/*.md
+# 应看到 7 个文件：architect developer project-lead researcher reviewer tech-writer tester
+
+# Codex：检查编排器和 AGENTS.md
+ls -la ~/.agents/skills/codex-orchestrator
+test -s ~/.codex/AGENTS.md
+# 编排器应为指向仓库的符号链接，AGENTS.md 应存在且非空
 ```
 
 ### 试一条
@@ -320,7 +331,7 @@ multi-agent-dev/
 ### 安装选项
 
 ```bash
-./install.sh --all        # 安装到所有检测到的平台
+./install.sh --all        # 安装到所有检测到的平台（目录或命令存在时）
 ./install.sh --claude     # 仅 Claude Code
 ./install.sh --codex      # 仅 Codex
 ./install.sh --uninstall  # 卸载
